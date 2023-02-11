@@ -1,0 +1,24 @@
+<h1 style="margin: auto;
+width: 25%;">offres-emploi works!</h1>
+<style>
+    div{ 
+        width: 300px;
+        height: 120px;
+    }
+    td{
+        padding-left: 10px;
+    }
+</style>
+<table>
+    <td><h2>search:  </h2> </td> <td><input type="text" [(ngModel)]="entrep" style="width: 300px;"></td>
+<td><button href="#" class="btn btn-primary" (click)="calculer()">Bilan {{n}}</button></td></table>
+<section *ngFor="let E of listeEmploi" style="margin-left: 50px;">
+    <div *ngIf="E.entreprice == entrep || !entrep " class="card" style="width: 18rem;">
+    <div>
+        <h1 class="card-title">{{E.titre}} {{E.entreprice}}</h1>
+        <button href="#" class="btn btn-primary" (click)="postuler" [disabled]="E.etat==false" style="width: 200px;margin-left:30px">Postuler</button>
+    </div>
+    </div>
+</section>
+<br>
+<router-outlet></router-outlet>
