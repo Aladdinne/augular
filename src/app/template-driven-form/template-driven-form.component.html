@@ -1,0 +1,43 @@
+<h1 style="margin: auto;
+width: 30%;">Le Template Driven Form</h1>
+<style>
+    fieldset {
+        border: 1px solid rgb(0,0,0);
+        width: 500px;
+        margin:auto;
+      }
+</style>
+<form #addForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+<fieldset>
+    <legend>Informations generales</legend>
+      <label>Nom:</label>
+        <input type="text" name="nom" required ngModel #nom="ngModel">
+        <span *ngIf="nom.invalid && nom.touched" class="error">Le champ nom est requis.</span>
+        <br>
+      <label>Email:</label>
+        <input type="email" name="email" required ngModel #email="ngModel" pattern="[a-zA-Z0-9._%+-]+[.]+[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]{3}">   
+        <span *ngIf="email?.errors?.['required'] && email.touched" class="error">Le champ email est requis.</span>
+        <span *ngIf="email?.errors?.['pattern']&& email.touched">Format invalid</span>
+
+    <fieldset>
+        <legend>
+            Informations de payement        </legend>
+        <label>Type de carte:</label>
+        <input type="text" name="type" required ngModel #type="ngModel">
+        <span *ngIf="type.invalid && type.touched" class="error">Le champ email est requis.</span>
+        <br>
+        <label>Numéro de carte:</label>
+        <input type="text" name="numero" required ngModel #numero="ngModel" pattern="[1-9]{16}"  >
+        <span *ngIf="numero?.errors?.['required'] && numero.touched" class="error">Le champ numéro est requis.</span>
+        <span *ngIf="numero?.errors?.['pattern']&& numero.touched">max 16 numéro</span>
+        <br>
+        <label>Date d'expiration:</label>
+        <input type="text" name="date" required ngModel #date="ngModel">
+        <br>
+        <label>Code:</label>
+        <input type="text" name="code" class="code" [disabled]="type.invalid || numero.invalid || date.invalid">
+
+    </fieldset>
+    <button type="submit" [disabled]="addForm.invalid" >Ajouter</button>
+</fieldset>
+</form>
